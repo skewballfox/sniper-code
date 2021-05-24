@@ -2,7 +2,8 @@
 // The module 'vscode' contains the VS Code extensibility API
 // Import the module and reference it with the alias vscode in your code below
 import * as vscode from 'vscode';
-import * as util from 'util';
+//import * as util from 'util';
+import { lineRange } from './utils'
 import { homedir } from 'os';
 //declare module "../../../sniper-node";
 const sniper = require('sniper-node');
@@ -15,14 +16,17 @@ import { strict } from 'assert';
 //TODO: create 'startSniper' function to either attach to running instance
 //or create new instance
 
-
+let sessionID = vscode.env.sessionId
+let fileName = vscode.window.activeTextEditor?.document.fileName;
+let language = vscode.window.activeTextEditor?.document.languageId;
+if (fileName && language) {
+	let target = new sniper.Target(sessionID, fileName, language);
+}
 
 export function activate(context: vscode.ExtensionContext) {
-	let fileName = vscode.window.activeTextEditor?.document.fileName;
-	let language = vscode.window.activeTextEditor?.document.languageId;
-	if (fileName && language) {
-		sniper.add_target(vscode.env.sessionId, fileName, language);
-	}
+
+
+
 	// Use the console to output diagnostic information (console.log) and errors (console.error)
 	// This line of code will only be executed once when your extension is activated
 	console.log("sniper started");
@@ -41,27 +45,30 @@ export function activate(context: vscode.ExtensionContext) {
 		vscode.window.showInformationMessage("hello from sniper");
 	});
 
+	context.subscriptions.push(
+		//it doesn't seem as though mapping function calls to completions items is possible
+		//https://vshaxe.github.io/vscode-extern/vscode/CompletionItem.html#TextEdit
+		//so going with manual checks, borrowed from hsnips
+		vscode.languages.registerCompletionItemProvider(
+
+			[{ scheme: 'untitled' }, { scheme: 'file' }], {
+			provideCompletionItems(document: vscode.TextDocument, position: vscode.Position) {
+				let line = document.getText(lineRange(0, position));
+				let match = line.match(/\S*$/)
+				let text = document.getText(lineRange((match as RegExpMatchArray).index || 0, position));
+
+				let completions = target.get_completions(text);
+				if (completions && Array.isArray(completions)) {
+					return completions.map((c) => c.toCompletionItem());
+				}
+			}
+		}),
+
+
+	);
 	context.subscriptions.push(disposable);
 }
 
-/*async function output() {
-	let disposable = vscode.commands.registerCommand('sniper-code.output', () => {
-		// The code you place here will be executed every time your command is executed
-		const activeEditor = vscode.window.activeTextEditor;
-		if (activeEditor) {
-			const definitions = await vscode.commands.executeCommand<vscode.Location[]>(
-				'vscode.executeDefinitionProvider',
-				activeEditor.document.uri,
-				activeEditor.selection.active
-			);
-			if (definitions) {
-				for (const definition of definitions) {
-					vscode.window.showInformationMessage(definition.toString());
-				}
-			}
-		}
-	}
 
-*/
 // this method is called when your extension is deactivated
 export function deactivate() { }
