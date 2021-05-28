@@ -24,6 +24,7 @@ export function activate(context: vscode.ExtensionContext) {
 	let fileName = vscode.window.activeTextEditor?.document.fileName;
 	let language = vscode.window.activeTextEditor?.document.languageId;
 	if (fileName && language) {
+
 		sniper.add_target(vscode.env.sessionId, fileName, language);
 	}
 
@@ -67,8 +68,9 @@ export function activate(context: vscode.ExtensionContext) {
 				let line = document.getText(lineRange(0, position));
 				let match = line.match(/\S*$/)
 				let text = document.getText(lineRange((match as RegExpMatchArray).index || 0, position));
-				console.log(document.uri)
+				console.log("starting completion request at: ", Date.now());
 				let completions = sniper.get_completions(vscode.env.sessionId, document.uri.path, text).map((name: string) => {
+					console.log("adding completion: ", name)
 					let completion = new vscode.CompletionItem(name);
 					completion.insertText = name;
 					completion.command = {
@@ -78,7 +80,7 @@ export function activate(context: vscode.ExtensionContext) {
 					};
 					return completion
 				});
-
+				console.log("returning completions at: ", Date.now());
 				return completions
 
 			}
