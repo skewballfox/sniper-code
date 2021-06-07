@@ -2,9 +2,11 @@
 
 WARNING: NOT READY
 
-this currently is under development. This will likely be under development for a while. I'm going to be working to implement this in another editor first, due to issues getting it to compile for the vscode's electron version, which is different from the system's version
+this currently is under development. 
 
-implementation of [sniper snippet manager](https://github.com/Sniper-Core) in vscode,which when fully implemented this will allow you to use the same snippets across editors. it's planned to also have a few features not found in other snippet managers, such as modular,library-based snippets.
+implementation of [sniper snippet manager](https://github.com/skewballfox/sniper) in vscode,which when fully implemented this will allow you to use the same snippets across editors. it's planned to also have a few features not found in other snippet managers, such as modular,library-based snippets.
+
+right now I'm mainly just working on implementing the minimum basic functionality (getting completions, getting snippets). This project should remain pretty bare bones(only implementing function calls, and performing necessary work for vscode specific details), because I'm trying to have the majority of the work handled independently of the editor.
 
 ## Features
 
@@ -12,7 +14,11 @@ implementation of [sniper snippet manager](https://github.com/Sniper-Core) in vs
 
 ## Requirements
 
-since sniper is planned to be editor agnostic, you'll have to install sniper-core and sniper-node indepently, I plan on writing an installer further into development. right now, the only reason you should do that is if you want to contribute to the project, because it is nowhere near ready for use.
+since sniper is planned to be editor agnostic, you'll have to install the [server](https://github.com/skewballfox/sniper) independently
+
+also right now you'll need to clone [sniper-node](https://github.com/skewballfox/sniper-node) into the same parent directory as this project, as I'm using relative pathing to build the project mainly so that I don't have to update the version info until I actually have a working implementation ( which will be `0.0.1`).
+
+Currently the only reason you should do the above is if you want to contribute to the project, because it is nowhere near ready for use.
 
 ## Extension Settings
 
@@ -21,19 +27,18 @@ since sniper is planned to be editor agnostic, you'll have to install sniper-cor
 
 ## Known Issues
 
-- currently can't compile for vscode due to limitations of build tools involved, until that is solved this will likely not be coming to vscode anytime soon.
+- it's not ready to use lol
 
 ## Release Notes
 
 Users appreciate release notes as you update your extension.
 
-### 1.0.0
+### 0.0.1
 
-- todo, this isn't even release 0.0.1
+- todo
 
 ### For more information
 
-- [sniper-core and explanation of the entire project](https://github.com/skewballfox/Sniper-Core)
-- [in progress specification of snippets and syntax](https://github.com/skewballfox/Sniper-Core/blob/main/Snippet_Syntax.md)
+- [the server for sniper and explanation of the entire project(including planned features)](https://github.com/skewballfox/sniper)
 
 **Enjoy!**

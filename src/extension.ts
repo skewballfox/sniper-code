@@ -69,14 +69,15 @@ export function activate(context: vscode.ExtensionContext) {
 				let match = line.match(/\S*$/)
 				let text = document.getText(lineRange((match as RegExpMatchArray).index || 0, position));
 				console.log("starting completion request at: ", Date.now());
-				let completions = sniper.get_completions(vscode.env.sessionId, document.uri.path, text).map((name: string) => {
-					console.log("adding completion: ", name)
-					let completion = new vscode.CompletionItem(name);
-					completion.insertText = name;
+				let completions = sniper.get_completions(vscode.env.sessionId, document.uri.path, text).map((s: { name: string, description: string }) => {
+					console.log("adding completion: ", s.name)
+					let completion = new vscode.CompletionItem(s.name);
+					completion.insertText = s.name;
+					completion.detail = s.description;
 					completion.command = {
 						command: 'sniper.snipe',
 						title: 'snipe',
-						arguments: [name],
+						arguments: [s.name],
 					};
 					return completion
 				});
