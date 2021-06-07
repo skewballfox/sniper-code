@@ -59,7 +59,11 @@ export function activate(context: vscode.ExtensionContext) {
 	context.subscriptions.push(
 		//it doesn't seem as though mapping function calls to completions items is possible
 		//https://vshaxe.github.io/vscode-extern/vscode/CompletionItem.html#TextEdit
-		//so going with manual checks, borrowed from hsnips
+		//so going with manual checks
+		//NOTE: to give credit where credit is due, this is partially borrowed from hsnips(link below)
+		//I say partially because it's been stripped of a lot of functionality (because that's 
+		//happening server side in this case)
+		//https://github.com/draivin/hsnips
 
 		vscode.languages.registerCompletionItemProvider(
 
