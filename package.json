@@ -19,6 +19,9 @@
 			{
 				"command": "sniper.testit",
 				"title": "log test output"
+			},
+			{
+				"command": "sniper.expand"
 			}
 		]
 	},
