@@ -1,12 +1,10 @@
 # sniper-code README
 
-WARNING: NOT READY
-
-this currently is under development. 
+P.S. this currently is under development. technically usable, if you stretch what is generally meant by usable, but I wouldn't recommend unless you are trying to contribute to the project. 
 
 implementation of [sniper snippet manager](https://github.com/skewballfox/sniper) in vscode,which when fully implemented this will allow you to use the same snippets across editors. it's planned to also have a few features not found in other snippet managers, such as modular,library-based snippets.
 
-right now I'm mainly just working on implementing the minimum basic functionality (getting completions, getting snippets). This project should remain pretty bare bones(only implementing function calls, and performing necessary work for vscode specific details), because I'm trying to have the majority of the work handled independently of the editor.
+This project should remain pretty bare bones(only implementing function calls, and performing necessary work for vscode specific details), because I'm trying to have the majority of the work handled independently of the editor. I have a working implementation of `get_target` and `get_snippets`, but I'm currently activating for python, and currently the server is expecting snippets to be located in `.config/sniper`
 
 ## Features
 
