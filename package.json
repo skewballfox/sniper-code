@@ -1,5 +1,6 @@
 {
 	"name": "sniper-code",
+	"title": "sniper-code",
 	"displayName": "sniper-code",
 	"description": "\"snippet management done right\"",
 	"version": "0.0.1",
@@ -47,6 +48,6 @@
 		"vscode-test": "^1.4.0"
 	},
 	"dependencies": {
-		"sniper-node": "file:../sniper-node"
+		"sniper-node": "skewballfox/sniper-node#main"
 	}
 }

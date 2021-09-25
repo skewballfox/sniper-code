@@ -14,9 +14,11 @@ This project should remain pretty bare bones(only implementing function calls, a
 
 since sniper is planned to be editor agnostic, you'll have to install the [server](https://github.com/skewballfox/sniper) independently
 
-also right now you'll need to clone [sniper-node](https://github.com/skewballfox/sniper-node) into the same parent directory as this project, as I'm using relative pathing to build the project mainly so that I don't have to update the version info until I actually have a working implementation ( which will be `0.0.1`).
+Until I figure out how to detach the server process from the first editor to make a request, You will need to launch sniper-server separately.
 
 Currently the only reason you should do the above is if you want to contribute to the project, because it is nowhere near ready for use.
+
+
 
 ## Extension Settings
 

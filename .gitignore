@@ -6,3 +6,4 @@ node_modules
 .yarn/*
 yarn-error.log
 .yarnclean
+yarn.lock
